@@ -57,11 +57,22 @@ class Clifford2(object):
         su = f"({su0}, {su1}, {su2}, {su12})"
         return su
 
+    def __repr__(self):
+        return self.__str__()
+
     def __add__(self, other):
         ru0 = self.u0 + other.u0
         ru1 = self.u1 + other.u1
         ru2 = self.u2 + other.u2
         ru12 = self.u12 + other.u12
+
+        return Clifford2(ru0, ru1, ru2, ru12)
+
+    def __sub__(self, other):
+        ru0 = self.u0 - other.u0
+        ru1 = self.u1 - other.u1
+        ru2 = self.u2 - other.u2
+        ru12 = self.u12 - other.u12
 
         return Clifford2(ru0, ru1, ru2, ru12)
 
