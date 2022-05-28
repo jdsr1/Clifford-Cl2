@@ -94,6 +94,9 @@ class Clifford2(object):
     def reverse(self):
         return Clifford2(self.u0, self.u1, self.u2, -self.u12)
 
+    def grade_involute(self):
+        return Clifford2(self.u0, -self.u1, -self.u2, self.u12)
+
     @property
     def norm2(self):
         uu = self*self.conj()
@@ -102,10 +105,11 @@ class Clifford2(object):
 
     def inverse(self):
         uu = self.norm2
-        ru0 = self.u0/uu
-        ru1 = self.u1/uu
-        ru2 = self.u2/uu
-        ru12 = self.u12/uu
+        ucon = self.conj()
+        ru0 = ucon.u0/uu
+        ru1 = ucon.u1/uu
+        ru2 = ucon.u2/uu
+        ru12 = ucon.u12/uu
 
         return Clifford2(ru0, ru1, ru2, ru12)
 
