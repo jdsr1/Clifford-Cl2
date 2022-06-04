@@ -94,7 +94,7 @@ class Clifford2(object):
     def reverse(self):
         return Clifford2(self.u0, self.u1, self.u2, -self.u12)
 
-    def grade_involute(self):
+    def ginv(self):
         return Clifford2(self.u0, -self.u1, -self.u2, self.u12)
 
     @property
@@ -113,19 +113,19 @@ class Clifford2(object):
 
         return Clifford2(ru0, ru1, ru2, ru12)
 
-def dot(self,other):
-    ru0  = self.u0*other.u0 + self.u1*other.u1 + self.u2*other.u2 \
-           - self.u12*other.u12
-    ru1  = self.u0*other.u1 + self.u1*other.u0
-    ru2  = self.u0*other.u2 + self.u2*other.u0
-    ru12 = self.u0*other.u12 + self.u12*other.u0
-
-    return Clifford2(ru0, ru1, ru2, ru12)
-
-def wedge(self,other):
-    ru0  = 0
-    ru1  = self.u12*other.u2 - self.u2*other.u12
-    ru2  = self.u1*other.u12 - self.u12*other.u1
-    ru12 = self.u1*other.u2  - self.u2*other.u1
-
-    return Clifford2(ru0, ru1, ru2, ru12)
+    def dot(self,other):
+        ru0  = self.u0*other.u0 + self.u1*other.u1 + self.u2*other.u2 \
+               - self.u12*other.u12
+        ru1  = self.u0*other.u1 + self.u1*other.u0
+        ru2  = self.u0*other.u2 + self.u2*other.u0
+        ru12 = self.u0*other.u12 + self.u12*other.u0
+    
+        return Clifford2(ru0, ru1, ru2, ru12)
+    
+    def wedge(self,other):
+        ru0  = 0
+        ru1  = self.u12*other.u2 - self.u2*other.u12
+        ru2  = self.u1*other.u12 - self.u12*other.u1
+        ru12 = self.u1*other.u2  - self.u2*other.u1
+    
+        return Clifford2(ru0, ru1, ru2, ru12)

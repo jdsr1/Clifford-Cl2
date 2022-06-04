@@ -60,13 +60,61 @@ print('a =',a)
 print('b =',b)
 print('r =',r)
 # Compute alpha, beta in r = alpha*a + beta*b.
-rb = cl.wedge(r,b)
+rb = r.wedge(b)
 print('rnb =',rb)
-ab = cl.wedge(a,b)
+ab = a.wedge(b)
 print('anb =',ab)
-ar = cl.wedge(a,r)
+ar = a.wedge(r)
 print('anr =',ar)
 alpha = rb*ab.inverse()
 beta = ar*ab.inverse()
 print('alpha =',alpha)
 print('beta =',beta)
+
+print('\nEjericio 6')
+# Define vectors
+a = cl.Clifford2(0,8,-1,0)
+b = cl.Clifford2(0,2,1,0)
+print('a =',a)
+print('b =',b)
+# Compute a||, a_|
+ap = a.dot(b)*b.inverse()
+print('a|| = ',ap)
+ap = a.wedge(b)*b.inverse()
+print('a_| = ',ap)
+
+print('\nEjericio 7')
+# Define vectors
+r = cl.Clifford2(0,4,-3,0)
+a = cl.Clifford2(0,3,-1,0)
+b = cl.Clifford2(0,2,1,0)
+print('r =',r)
+print('a =',a)
+print('b =',b)
+# Reflect r across a and then across b
+r1 = a*r*a.inverse()
+print('ara^-1 = ',r1)
+r2 = (b*a)*r*(b*a).inverse()
+print('(ba)r(ba)^-1 = ',r2)
+
+print('\nEjericio 8')
+# Define vectors
+print('Symbolic operations not available')
+
+print('\nEjericio 9')
+# Define vectors
+u = cl.Clifford2(1,1,0,1)
+print('u =',u)
+# Compute u^-1
+ui = u.inverse()
+print('u^-1 = ',ui)
+print('u.ginv*(u*u.ginv)^-1 = ', u.ginv()*(u*u.ginv()).inverse())
+print('(u*u.ginv)^-1*g.ginv = ', (u*u.ginv()).inverse()*u.ginv())
+print('u.ginv*(u.ginv*u)^-1 = ', u.ginv()*(u.ginv()*u).inverse())
+print('u.reverse*(u*u.reverse)^-1 = ', u.reverse()*(u*u.reverse()).inverse())
+print('(u*u.reverse)^-1*g.reverse = ', (u*u.reverse()).inverse()*u.reverse())
+print('u.reverse*(u.reverse*u)^-1 = ', u.reverse()*(u.reverse()*u).inverse())
+
+print('\nEjericio 10')
+# Define vectors
+print('Symbolic operations not available')
