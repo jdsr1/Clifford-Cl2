@@ -94,7 +94,7 @@ class Clifford2(object):
     def reverse(self):
         return Clifford2(self.u0, self.u1, self.u2, -self.u12)
 
-    def grade_involute(self):
+    def ginv(self):
         return Clifford2(self.u0, -self.u1, -self.u2, self.u12)
 
     @property
@@ -113,43 +113,19 @@ class Clifford2(object):
 
         return Clifford2(ru0, ru1, ru2, ru12)
 
-#print("Ex. 1")
-a = Clifford2(0,0,1,-1)
-b = Clifford2(0,1,1,0)
-ib = b.inverse()
-c = Clifford2(1,0,1,0)
-print(f"a = {a}")
-print(f"b = {b}")
-print(f"b^-1 = {ib}")
-print(f"bbinv = {b*ib}\nbinvb = {ib*b}")
-print(f"c = {c}\n")
-print(f"aa* = {a.norm2}")
-print(f"bb* = {b.norm2}")
-print(f"cc* = {c.norm2}")
-#print(f"ab = {a*b}")
-#print(f"ac = {a*c}\n")
-#
-#print("Ex. 2")
-#a = Clifford2(0,0,1,1)
-#b = Clifford2(0.5, 0.5,0,0)
-#print(f"a = {a}")
-#print(f"b = {b}\n")
-#print(f"ab = {a*b}")
-#print(f"ba = {b*a}\n")
-#
-#print("Ex. 3")
-#a = Clifford2(1,1,0,0)
-#b = Clifford2(-1,1,0,0)
-#c = Clifford2(0,1,1,0)
-#print(f"a = {a}")
-#print(f"b = {b}")
-#print(f"c = {c}\n")
-#print(f"ab = {a*b}\nba = {b*a}\nac = {a*c}\nca = {c*a}")
-#print(f"bc = {b*c}\ncb = {c*b}\n")
-
-#print("Ex. 4")
-a = Clifford2(0.5,0.5,0,0)
-b = Clifford2(0,1,0,1)
-print(f"a = {a}\nb = {b}\n")
-print(f"a^2 = {a*a}")
-#print(f"b^2 = {b*b}")
+    def dot(self,other):
+        ru0  = self.u0*other.u0 + self.u1*other.u1 + self.u2*other.u2 \
+               - self.u12*other.u12
+        ru1  = self.u0*other.u1 + self.u1*other.u0
+        ru2  = self.u0*other.u2 + self.u2*other.u0
+        ru12 = self.u0*other.u12 + self.u12*other.u0
+    
+        return Clifford2(ru0, ru1, ru2, ru12)
+    
+    def wedge(self,other):
+        ru0  = 0
+        ru1  = self.u12*other.u2 - self.u2*other.u12
+        ru2  = self.u1*other.u12 - self.u12*other.u1
+        ru12 = self.u1*other.u2  - self.u2*other.u1
+    
+        return Clifford2(ru0, ru1, ru2, ru12)
