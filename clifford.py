@@ -1,11 +1,25 @@
 #!/usr/bin/python
 
 class Clifford2(object):
-    def __init__(self, u0, u1, u2, u12):
-        self.u0 = u0
-        self.u1 = u1
-        self.u2 = u2
-        self.u12 = u12
+    def __init__(self, u0, u1, u2, u12, from_matrix=False):
+
+        # the four numbers given to the constructor are a, b, c, and d
+        # from the matrix [[a,b],[c,d]].
+
+        if (from_matrix):
+            self.u0 = 0.5*(u0 + u12)
+            self.u1 = 0.5*(u0 - u12)
+            self.u2 = 0.5*(u1 + u2)
+            self.u12 = 0.5*(u1 - u2)
+
+        # the four numbers given to the constructor are the components
+        # of the u in Cl2.
+
+        else:
+            self.u0 = u0
+            self.u1 = u1
+            self.u2 = u2
+            self.u12 = u12
 
     def __str__(self):
         eps = 1.0e-6
@@ -129,3 +143,12 @@ class Clifford2(object):
         ru12 = self.u1*other.u2  - self.u2*other.u1
     
         return Clifford2(ru0, ru1, ru2, ru12)
+
+    def to_matrix(self):
+        a = self.u0 + self.u1
+        b = self.u2 + self.u12
+        c = self.u2 - self.u12
+        d = self.u0 - self.u1
+        m = [ [a, b],
+              [c, d]]
+        return m
